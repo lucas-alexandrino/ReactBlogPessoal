@@ -1,0 +1,11 @@
+#titulo {
+    background-color: rgb(53, 212, 31);
+    text-align: center;
+    text-decoration: double;
+}
+.img {
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}

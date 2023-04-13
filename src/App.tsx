@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Navbar from "./components/statics/navbar/Navbar";
 import Footer from "./components/statics/footer/Footer";
+
 import "./App.css";
 import Home from "./paginas/home/Home";
-
+import Login from "./paginas/login/Login";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -11,7 +14,13 @@ function App() {
   return (
     <>
       <Navbar />
-      <Home />
+      <BrowserRouter>
+        <Routes>
+        <Route path="/" element={<Login />} />;
+          <Route path="/home" element={<Home />} />;
+          
+        </Routes>
+      </BrowserRouter>
       <Footer />
     </>
   );

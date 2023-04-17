@@ -7,6 +7,7 @@ import Footer from "./components/statics/footer/Footer";
 import "./App.css";
 import Home from "./paginas/home/Home";
 import Login from "./paginas/login/Login";
+import CadastroUsuario from "./paginas/cadastroUsuario/CadastroUsuario";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -18,6 +19,7 @@ function App() {
         <Routes>
         <Route path="/" element={<Login />} />;
           <Route path="/home" element={<Home />} />;
+          <Route path="/cadastro" element={<CadastroUsuario/>}/>
           
         </Routes>
       </BrowserRouter>

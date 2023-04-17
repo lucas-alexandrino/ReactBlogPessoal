@@ -1,9 +1,48 @@
-import React from "react";
 import "./Login.css";
 import { Grid, Box, Typography, TextField, Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useLocalStorage from "react-use-localstorage";
+import { login } from "../../service/Service";
+import UserLogin from "../../model/UserLogin";
+import { ChangeEvent, useState ,useEffect } from "react";
 
 function Login() {
+  let history = useNavigate();
+  const [token, setToken] = useLocalStorage("token");
+
+  const [UserLogin, setUserLogin] = useState<UserLogin>({
+    id: 0,
+    nome: "",
+    usuario: "",
+    senha: "",
+    foto: "",
+    token: "",
+  });
+
+  function updatedModel(e: ChangeEvent<HTMLInputElement>) {
+    setUserLogin({
+      ...UserLogin,
+      [e.target.name]: e.target.value,
+    });
+  }
+  useEffect(()=>{
+    if(token != '') {
+      history('/home')
+    }
+  } , [token])
+
+  async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    try {
+      await login (`/usuarios/logar`, UserLogin , setToken);
+      
+      alert("Usuario logado com sucesso!");
+    } catch (error) {
+      alert("Usuario e senha incorretos!");
+    }
+  }
+
   return (
     <Grid
       container
@@ -14,7 +53,7 @@ function Login() {
     >
       <Grid item xs={6} alignItems="center">
         <Box px={20}>
-          <form>
+          <form onSubmit={onSubmit}>
             <Typography
               variant="h3"
               gutterBottom
@@ -25,6 +64,8 @@ function Login() {
               Entrar
             </Typography>
             <TextField
+              value={UserLogin.usuario}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)}
               id="usuario"
               label="usuario"
               variant="outlined"
@@ -33,6 +74,8 @@ function Login() {
               fullWidth
             />
             <TextField
+              value={UserLogin.senha}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)}
               id="senha"
               label="senha"
               variant="outlined"
@@ -42,43 +85,45 @@ function Login() {
               fullWidth
             />
             <Box textAlign="center" marginTop={2}>
-              <Link to="/home" className="text-decorator-none">
-                <Button type="submit" variant="contained" color="primary">
-                  Logar
-                </Button>
-              </Link>
+              <Button type="submit" variant="contained" color="primary">
+                Logar
+              </Button>
             </Box>
-            <Box>
-              <Link to="/login" className="text-decorator-none">
-                <Button type="submit" variant="contained" color="primary">
-                  Logar
-                </Button>
-              </Link>
-            </Box>
+            
             <Box display="flex" justifyContent="center" marginTop={2}>
               <Box marginRight={1}>
                 <Typography variant="subtitle1" gutterBottom align="center">
                   Não tem uma conta?
                 </Typography>
               </Box>
-              <Typography
-                variant="subtitle1"
-                gutterBottom
-                align="center"
-                style={{ fontWeight: "bold" }}
-              >
-                Cadastre-se{" "}
-              </Typography>
+
+              <Link to="/cadastro" className="text-decorator-none">
+                {" "}
+                <Typography
+                  variant="subtitle1"
+                  gutterBottom
+                  align="center"
+                  style={{ fontWeight: "bold" }}
+                >
+                  Cadastre-se{" "}
+                </Typography>
+              </Link>
             </Box>
-          </form>
+            </form>
         </Box>
       </Grid>
-      <Grid item xs={6} style={{
-        backgroundImage:`url (src\assets\react.svg)`,
-        backgroundRepeat: 'no-repeat', width:'100vh' , minHeight:'100vh',backgroundSize:'cover',backgroundPosition:'center'
-      }}>
-
-      </Grid>
+      <Grid
+        item
+        xs={6}
+        style={{
+          backgroundImage: `url("/background.png")`,
+          backgroundRepeat: "no-repeat",
+          width: "100vh",
+          minHeight: "100vh",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      ></Grid>
     </Grid>
   );
 }

@@ -6,10 +6,10 @@ function Footer() {
     <>
       <Grid container spacing={2} columns={16} style={{ minHeight: "100vh" }}>
         <Grid item xs={8}>
-          <h1> item 1</h1>
+          <h1> footer</h1>
         </Grid>
         <Grid item xs={8}>
-          <h1> item 2</h1>
+          <h1> footer 2</h1>
         </Grid>
       </Grid>
     </>

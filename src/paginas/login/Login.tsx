@@ -8,15 +8,16 @@ import { ChangeEvent, useState ,useEffect } from "react";
 
 function Login() {
   let history = useNavigate();
+  // Hook usado para gravar o token no useLocalStorage
   const [token, setToken] = useLocalStorage("token");
-
+// Hook useState: estado inicial da variavel quando o Componente é renderizado
   const [UserLogin, setUserLogin] = useState<UserLogin>({
     id: 0,
     nome: "",
     usuario: "",
     senha: "",
     foto: "",
-    token: "",
+    token: ""
   });
 
   function updatedModel(e: ChangeEvent<HTMLInputElement>) {
@@ -25,6 +26,7 @@ function Login() {
       [e.target.name]: e.target.value,
     });
   }
+  // Hook de efeito colateral, sempre executa uma função quando o que estiver no Array for modificado
   useEffect(()=>{
     if(token != '') {
       history('/home')

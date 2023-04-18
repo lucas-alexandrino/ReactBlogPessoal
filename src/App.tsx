@@ -8,6 +8,8 @@ import "./App.css";
 import Home from "./paginas/home/Home";
 import Login from "./paginas/login/Login";
 import CadastroUsuario from "./paginas/cadastroUsuario/CadastroUsuario";
+import ListaTema from "./components/temas/listatema/ListaTema";
+import ListaPostagem from "./components/postagens/listapostagem/ListaPostagem";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -18,9 +20,11 @@ function App() {
       <BrowserRouter>
         <Routes>
         <Route path="/" element={<Login />} />;
+        <Route path="/login" element={<Login />} />;
           <Route path="/home" element={<Home />} />;
           <Route path="/cadastro" element={<CadastroUsuario/>}/>
-          
+          <Route path="/posts" element={<ListaPostagem/>}/>
+          <Route path="/temas" element={<ListaTema/>}/>
         </Routes>
       </BrowserRouter>
       <Footer />

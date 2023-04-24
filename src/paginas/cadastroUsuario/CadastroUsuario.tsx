@@ -54,13 +54,36 @@ function CadastroUsuario() {
     }
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault()
-        if(confirmarSenha == user.senha){
-        await cadastroUsuario(`/usuarios/cadastrar`, user, setUserResult)
-        alert('Usuario cadastrado com sucesso')
-        }else{
-            alert('Dados inconsistentes. Favor verificar as informações de cadastro.')
+      
+        // Estrutura Condicional que verifica se as senhas batem e se a Senha tem mais de 8 caracteres
+        if (confirmarSenha === user.senha && user.senha.length >= 8) {
+
+            //Tenta executar o cadastro
+            try {
+                await cadastroUsuario(`/usuarios/cadastrar`, user, setUserResult)
+                alert('Usuario cadastrado com sucesso')
+
+                //Se houver erro, pegue o Erro e retorna uma msg
+            } catch (error) {
+                console.log(`Error: ${error}`)
+                alert("Erro ao cadastrar o Usuário")
+            }
+
+        } else {
+            alert('Dados inconsistentes. Verifique as informações de cadastro.')
+
+            setUser({ ...user, senha: "" }) // Reinicia o campo de Senha
+            setConfirmarSenha("")           // Reinicia o campo de Confirmar Senha
         }
     }
+
+    /*  Operadores utilizados 
+        = : Atribuição (valor = 9)         - Atribui um valor a uma variavel/constante
+        == : Op. Aritmetico (valor == 9.0) - Verifica se os valores são iguais
+        === : Op. Idêntico (valor === 9.0) - Verifica se os valores e tipos são iguais
+    */
+
+
     return (
         <Grid container direction='row' justifyContent='center' alignItems='center'>
             <Grid item xs={6} className='imagem2'></Grid>

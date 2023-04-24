@@ -49,18 +49,19 @@ function CadastroTema() {
         
         async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
             e.preventDefault()
-            console.log("tema " + JSON.stringify(tema))
-    
+            
             if (id !== undefined) {
-                console.log(tema)
-                put(`/temas`, tema, setTema, {
+                console.log("tema " + JSON.stringify(tema))
+
+                await put(`temas`, tema, setTema, {
                     headers: {
                         'Authorization': token
                     }
                 })
                 alert('Tema atualizado com sucesso');
             } else {
-                post(`/temas`, tema, setTema, {
+                console.log("tema " + JSON.stringify(tema))
+                await post(`temas`, tema, setTema, {
                     headers: {
                         'Authorization': token
                     }

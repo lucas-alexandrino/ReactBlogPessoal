@@ -102,6 +102,7 @@ function CadastroPost() {
             }
         }
         back()
+        
     }
 
     function back() {

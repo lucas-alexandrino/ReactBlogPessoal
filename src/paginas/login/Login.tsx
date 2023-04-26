@@ -5,11 +5,13 @@ import useLocalStorage from "react-use-localstorage";
 import { login } from "../../service/Service";
 import UserLogin from "../../model/UserLogin";
 import { ChangeEvent, useState ,useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { addToken } from "../../store/tokens/action";
 
 function Login() {
   let history = useNavigate();
-  // Hook usado para gravar o token no useLocalStorage
-  const [token, setToken] = useLocalStorage("token");
+  const dispatch = useDispatch();
+  const [token, setToken] = useState("");
 // Hook useState: estado inicial da variavel quando o Componente é renderizado
   const [UserLogin, setUserLogin] = useState<UserLogin>({
     id: 0,
@@ -29,6 +31,7 @@ function Login() {
   // Hook de efeito colateral, sempre executa uma função quando o que estiver no Array for modificado
   useEffect(()=>{
     if(token != '') {
+      dispatch(addToken(token))
       history('/home')
     }
   } , [token])

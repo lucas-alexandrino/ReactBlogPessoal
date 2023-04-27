@@ -6,6 +6,7 @@ import { Grid, Typography, Button, TextField } from '@material-ui/core';
 import {Box} from '@mui/material';
 import { Link } from 'react-router-dom';
 import './CadastroUsuario.css';
+import { toast } from 'react-toastify';
 
 function CadastroUsuario() {
 
@@ -61,16 +62,43 @@ function CadastroUsuario() {
             //Tenta executar o cadastro
             try {
                 await cadastroUsuario(`/usuarios/cadastrar`, user, setUserResult)
-                alert('Usuario cadastrado com sucesso')
+                toast.success('Usuário cadastrado com sucesso!', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false,
+                    theme: "colored",
+                    progress: undefined
+                   });
 
                 //Se houver erro, pegue o Erro e retorna uma msg
             } catch (error) {
                 console.log(`Error: ${error}`)
-                alert("Erro ao cadastrar o Usuário")
+                toast.error('Erro ao cadastrar o usuário!', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false,
+                    theme: "colored",
+                    progress: undefined
+                   });
             }
 
         } else {
-            alert('Dados inconsistentes. Verifique as informações de cadastro.')
+            toast.error('Dados inconsistentes. Favor verificar as informações de cadastro!', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                theme: "colored",
+                progress: undefined
+               });
 
             setUser({ ...user, senha: "" }) // Reinicia o campo de Senha
             setConfirmarSenha("")           // Reinicia o campo de Confirmar Senha

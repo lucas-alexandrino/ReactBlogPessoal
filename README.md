@@ -51,6 +51,11 @@ O Blog Pessoal desenvolvido em React possui as seguintes funcionalidades:
 <li> Gerenciamento de comentários em cada postagem.
 </ul>
 
+#
+![](https://ibb.co/8cRH9gchttps://ibb.co/8cRH9gc)
+
+
+#
 # Contato
 Se tiver alguma dúvida ou sugestão relacionada a este projeto, entre em contato comigo  através do email lucas.alexcontato@gmail.com
 
